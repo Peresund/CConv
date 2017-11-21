@@ -13,7 +13,7 @@ window.Vue = require('vue');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-//import 'expose-loader?$!expose-loader?jQuery!jquery'
+import 'expose-loader?$!expose-loader?jQuery!jquery'
 //
 //import Vue from 'vue'
 //import App from './App'
@@ -30,3 +30,9 @@ window.Vue = require('vue');
 //	template: '<CurrencyList/>',
 //	components: { CurrencyList }
 //});
+import CurrencyConverter from './components/CurrencyConverter/CurrencyConverter'
+new Vue({
+	el: 'CurrencyConverter',
+	template: '<CurrencyConverter/>',
+	components: { CurrencyConverter }
+});
