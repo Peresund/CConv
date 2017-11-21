@@ -12,6 +12,7 @@
 */
 
 Route::get('/', "Home\HomeController@index");
+Route::get('/test', "Home\HomeController@test");
 
-Route::get('/test', 'Home\HomeController@get_message');
-Route::post('/test', 'Home\HomeController@get_message');
+//Route::get('/test', 'Home\HomeController@get_message');
+//Route::post('/test', 'Home\HomeController@get_message');

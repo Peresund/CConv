@@ -25,13 +25,10 @@
 				<div class="col-xs-12">
 					<form>
 						<div class="col-xs-12 col-md-2 col-lg-1">
-							<label for="from" class="content-item col-xs-12">
+							<label for="fromCurrency" class="content-item col-xs-12">
 								From:
 							</label>
-							<select id="from" class="content-item bottom">
-								<option>EUR</option>
-								<option>SEK</option>
-								<option>USD</option>
+							<select id="fromCurrency" class="content-item bottom">
 							</select>
 						</div>
 						<div class="col-xs-12 col-md-6 col-lg-4">
@@ -41,13 +38,10 @@
 							<input id="val" class="content-item bottom" type="number" step="any" name="fullname" value="" style="width: 100%; max-width: 300px;">
 						</div>
 						<div class="col-xs-12 col-md-2 col-lg-1">
-							<label for="to" class="content-item col-xs-12">
+							<label for="toCurrency" class="content-item col-xs-12">
 								To:
 							</label>
-							<select id="to" class="content-item bottom">
-								<option>EUR</option>
-								<option>SEK</option>
-								<option>USD</option>
+							<select id="toCurrency" class="content-item bottom">
 							</select>
 						</div>
 						<div class="col-xs-12 col-md-1 col-lg-3">
@@ -108,6 +102,11 @@
 					  </tbody>
 					</table>
 				</div>
+				
+				<div id="testContent">
+					
+				</div>
+				
             </div>
         </div>
 		
