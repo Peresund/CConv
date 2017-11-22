@@ -1,10 +1,15 @@
 <?php
 
-namespace App;
+namespace App\Models\CurrencyConverter;
 
-class Currency
+use Illuminate\Database\Eloquent\Model;
+
+class Currency extends Model
 {
-    protected $fillable = [
-        'iso_4217', 'name', 'date_created', 'date_modified', 'rate'
-    ];
+
+	public $timestamps = false;
+	
+	function scopeWithCode($query, $code) {
+		return $query->where('iso_4217', '=', $code);
+	}
 }
