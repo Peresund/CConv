@@ -14,5 +14,13 @@
 Route::get('/', "Home\HomeController@index");
 Route::get('/test', "Home\HomeController@test");
 
-//Route::get('/test', 'Home\HomeController@get_message');
-//Route::post('/test', 'Home\HomeController@get_message');
+//Route::get('/updateCurrencies', 'Home\HomeController@updateCurrencies');
+
+Route::get('/updateCurrencies', 'Home\HomeController@updateCurrencies');
+Route::post('/updateCurrencies', 'Home\HomeController@updateCurrencies');
+
+Route::get('/getCurrencies', 'Home\HomeController@getCurrencies');
+Route::post('/getCurrencies', 'Home\HomeController@getCurrencies');
+
+Route::get('/clearCurrencies', 'Home\HomeController@clearCurrencies');
+Route::post('/clearCurrencies', 'Home\HomeController@clearCurrencies');

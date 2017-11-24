@@ -12,3 +12,4 @@ yarn-error.log
 hs_err_*
 .env
 /nbproject/
+dump.rdb

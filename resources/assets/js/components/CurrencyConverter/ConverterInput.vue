@@ -36,7 +36,7 @@
 
 <script>
 	$.get('https://openexchangerates.org/api/currencies.json', function(data) {
-		$.each(data, function (key) {
+		$.each(data, function (key, value) {
 			$('#fromCurrency, #toCurrency').append
 			(
 				"<option>" + key + "</option>"

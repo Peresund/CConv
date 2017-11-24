@@ -1,16 +1,16 @@
 
 <template>
 	<div class="col-xs-12">
-		<button class="btn btn-default">
+		<button id="updateCurrenciesButton" class="btn btn-default">
 			Update Currencies
 		</button>
-		<button class="btn btn-default">
+		<button id="clearCurrenciesButton" class="btn btn-default">
 			Clean
 		</button>
 
 		<br /><br />
 
-		<table class="table table-striped table-bordered">
+		<table id="currenciesTable" class="table table-striped table-bordered">
 			<thead>
 				<tr>
 					<th>ISO 4217</th>
@@ -44,5 +44,9 @@
 				</tr>
 			</tbody>
 		</table>
+		
+		<div id="testDiv">
+			
+		</div>
 	</div>
 </template>

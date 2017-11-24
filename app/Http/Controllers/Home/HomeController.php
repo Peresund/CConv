@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
+use App\Models\CurrencyConverter\Currency;
+use DB;
 
 class HomeController extends Controller
 {
@@ -12,26 +15,53 @@ class HomeController extends Controller
 
     public $restful = true;
 
-    public function index() 
+    public function index()
     {
         return View::make('home.index');
     }
 
-    public function test() 
+    public function test()
     {
         return View::make('test.index');
     }
 	
-	public function get_message(Request $request)
+	public function clearCurrencies()
 	{
-		$msg = "This is a simple message.";
-        if ($request->isMethod('post')){    
-            return response()->json(['response' => 'post' + $msg]); 
-        }
-
-        return response()->json(['response' => 'get:' + $msg]);
-//		return response()->json(array('msg' => $msg), 200);
+		Currency::truncate();
+		return redirect()->action(
+			'Home\HomeController@getCurrencies'
+		);
 	}
+
+	public function getCurrencies()
+	{
+		$currencies = Currency::orderBy('iso_4217', 'ASC')->get();
+		return $currencies->toJson();
+	}
+	
+    public function createCurrencies(Request $request)
+	{
+		
+	}
+	
+    public function updateCurrencies(Request $request)
+    {
+		$input = $request->input();
+		Log::info($input);
+		$rates = $input['rates'];
+		$names = $input['names'];
+		
+		foreach($rates as $key => $value) {
+			$currency = Currency::firstOrNew(array('iso_4217' => $key));
+			$currency->name = $names[$key];
+			$currency->rate = $value;
+			$currency->save();
+		}
+		
+		return redirect()->action(
+			'Home\HomeController@getCurrencies'
+		);
+    }
 
     /**
      * Create a new controller instance.

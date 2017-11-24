@@ -42836,10 +42836,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConverterBottom__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConverterBottom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ConverterBottom__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ConverterTop__ = __webpack_require__(45);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ConverterTop___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ConverterTop__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConverterTable__ = __webpack_require__(43);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ConverterTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ConverterTable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ConverterInput__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ConverterInput___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__ConverterInput__);
 //
 //
 //
@@ -42859,8 +42859,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
 	name: 'CurrencyConverter',
 	components: {
-		ConverterTop: __WEBPACK_IMPORTED_MODULE_1__ConverterTop___default.a,
-		ConverterBottom: __WEBPACK_IMPORTED_MODULE_0__ConverterBottom___default.a
+		ConverterInput: __WEBPACK_IMPORTED_MODULE_1__ConverterInput___default.a,
+		ConverterTable: __WEBPACK_IMPORTED_MODULE_0__ConverterTable___default.a
 	}
 });
 
@@ -42890,7 +42890,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CurrencyConverter/ConverterBottom.vue"
+Component.options.__file = "resources/assets/js/components/CurrencyConverter/ConverterTable.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -42900,9 +42900,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-45c839a4", Component.options)
+    hotAPI.createRecord("data-v-2c87e636", Component.options)
   } else {
-    hotAPI.reload("data-v-45c839a4", Component.options)
+    hotAPI.reload("data-v-2c87e636", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -42928,70 +42928,89 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-xs-12" }, [
-      _c("button", { staticClass: "btn btn-default" }, [
-        _vm._v("\n\t\tUpdate Currencies\n\t")
-      ]),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { id: "updateCurrenciesButton" }
+        },
+        [_vm._v("\n\t\tUpdate Currencies\n\t")]
+      ),
       _vm._v(" "),
-      _c("button", { staticClass: "btn btn-default" }, [
-        _vm._v("\n\t\tClean\n\t")
-      ]),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { id: "clearCurrenciesButton" }
+        },
+        [_vm._v("\n\t\tClean\n\t")]
+      ),
       _vm._v(" "),
       _c("br"),
       _c("br"),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped table-bordered" }, [
-        _c("thead", [
-          _c("tr", [
-            _c("th", [_vm._v("ISO 4217")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Name")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Date Created")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Date Modified")]),
-            _vm._v(" "),
-            _c("th", [_vm._v("Rate")])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("tbody", [
-          _c("tr", [
-            _c("td", [_vm._v("AED")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Emiratisk Dirham")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("3.672626")])
+      _c(
+        "table",
+        {
+          staticClass: "table table-striped table-bordered",
+          attrs: { id: "currenciesTable" }
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("ISO 4217")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Name")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Date Created")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Date Modified")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("Rate")])
+            ])
           ]),
           _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("ALL")]),
+          _c("tbody", [
+            _c("tr", [
+              _c("td", [_vm._v("AED")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Emiratisk Dirham")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("3.672626")])
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v("Albanian Lek")]),
+            _c("tr", [
+              _c("td", [_vm._v("ALL")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Albanian Lek")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("48.3775")])
+            ]),
             _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("48.3775")])
-          ]),
-          _vm._v(" "),
-          _c("tr", [
-            _c("td", [_vm._v("ANG")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("Neth Antilles Guilder")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("2015-01-01 00:00:00")]),
-            _vm._v(" "),
-            _c("td", [_vm._v("110.223333")])
+            _c("tr", [
+              _c("td", [_vm._v("ANG")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("Neth Antilles Guilder")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("2015-01-01 00:00:00")]),
+              _vm._v(" "),
+              _c("td", [_vm._v("110.223333")])
+            ])
           ])
-        ])
-      ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "testDiv" } })
     ])
   }
 ]
@@ -43000,7 +43019,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-45c839a4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-2c87e636", module.exports)
   }
 }
 
@@ -43030,7 +43049,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/CurrencyConverter/ConverterTop.vue"
+Component.options.__file = "resources/assets/js/components/CurrencyConverter/ConverterInput.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -43040,9 +43059,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-746ecaac", Component.options)
+    hotAPI.createRecord("data-v-73fe6a3e", Component.options)
   } else {
-    hotAPI.reload("data-v-746ecaac", Component.options)
+    hotAPI.reload("data-v-73fe6a3e", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43193,7 +43212,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-746ecaac", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-73fe6a3e", module.exports)
   }
 }
 
@@ -43215,11 +43234,11 @@ var render = function() {
       _vm._v(" "),
       _c("hr", { staticClass: "gradient col-xs-12" }),
       _vm._v(" "),
-      _c("ConverterTop"),
+      _c("ConverterInput"),
       _vm._v(" "),
       _c("hr", { staticClass: "gradient col-xs-12" }),
       _vm._v(" "),
-      _c("ConverterBottom")
+      _c("ConverterTable")
     ],
     1
   )

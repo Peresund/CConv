@@ -9,6 +9,10 @@ class Currency extends Model
 
 	public $timestamps = false;
 	
+    protected $fillable = [
+        'iso_4217', 'name', 'rate',
+    ];
+	
 	function scopeWithCode($query, $code) {
 		return $query->where('iso_4217', '=', $code);
 	}

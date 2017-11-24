@@ -5,20 +5,20 @@
 			Currency Converter
 		</div>
 		<hr class="gradient col-xs-12" />
-		<ConverterTop></ConverterTop>
+		<ConverterInput></ConverterInput>
 		<hr class="gradient col-xs-12" />
-		<ConverterBottom></ConverterBottom>
+		<ConverterTable></ConverterTable>
 	</div>
 </template>
 
 <script>
-	import ConverterBottom from './ConverterBottom'
-	import ConverterTop from './ConverterTop'
+	import ConverterTable from './ConverterTable'
+	import ConverterInput from './ConverterInput'
 	export default {
 		name: 'CurrencyConverter',
 		components: {
-		  ConverterTop,
-		  ConverterBottom
+		  ConverterInput,
+		  ConverterTable
 		}
 	}
 </script>
