@@ -16,4 +16,8 @@ class Currency extends Model
 	public function scopeWithCode($query, $code) {
 		return $query->where('iso_4217', '=', $code);
 	}
+	
+	public function getOrdered($order) {
+		
+	}
 }

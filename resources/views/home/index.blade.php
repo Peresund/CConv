@@ -27,6 +27,6 @@
 		
 		<!-- Scripts -->
 		<script src="/js/app.js"></script>
-		<script src="/js/home.js"></script>
+		<script src="/js/currencyConverter.js"></script>
     </body>
 </html>
