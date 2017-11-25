@@ -21,32 +21,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>AED</td>
-					<td>Emiratisk Dirham</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>3.672626</td>
-				</tr>
-				<tr>
-					<td>ALL</td>
-					<td>Albanian Lek</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>48.3775</td>
-				</tr>
-				<tr>
-					<td>ANG</td>
-					<td>Neth Antilles Guilder</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>2015-01-01 00:00:00</td>
-					<td>110.223333</td>
-				</tr>
 			</tbody>
 		</table>
-		
-		<div id="testDiv">
-			
-		</div>
 	</div>
 </template>

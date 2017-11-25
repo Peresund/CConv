@@ -39,15 +39,9 @@ class HomeController extends Controller
 		return $currencies->toJson();
 	}
 	
-    public function createCurrencies(Request $request)
-	{
-		
-	}
-	
     public function updateCurrencies(Request $request)
     {
 		$input = $request->input();
-		Log::info($input);
 		$rates = $input['rates'];
 		$names = $input['names'];
 		

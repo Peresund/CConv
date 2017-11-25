@@ -42970,47 +42970,9 @@ var staticRenderFns = [
             ])
           ]),
           _vm._v(" "),
-          _c("tbody", [
-            _c("tr", [
-              _c("td", [_vm._v("AED")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Emiratisk Dirham")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("3.672626")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("ALL")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Albanian Lek")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("48.3775")])
-            ]),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", [_vm._v("ANG")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("Neth Antilles Guilder")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("2015-01-01 00:00:00")]),
-              _vm._v(" "),
-              _c("td", [_vm._v("110.223333")])
-            ])
-          ])
+          _c("tbody")
         ]
-      ),
-      _vm._v(" "),
-      _c("div", { attrs: { id: "testDiv" } })
+      )
     ])
   }
 ]
@@ -43109,12 +43071,10 @@ module.exports = Component.exports
 //
 //
 //
-//
-//
 
 $.get('https://openexchangerates.org/api/currencies.json', function (data) {
-	$.each(data, function (key) {
-		$('#fromCurrency, #toCurrency').append("<option>" + key + "</option>");
+	$.each(data, function (key, value) {
+		$('#inputFromCurrency, #inputToCurrency').append("<option>" + key + "</option>");
 	});
 });
 
@@ -43134,76 +43094,82 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-xs-12" }, [
-      _c("form", [
-        _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
-          _c(
-            "label",
-            {
-              staticClass: "content-item col-xs-12",
-              attrs: { for: "fromCurrency" }
-            },
-            [_vm._v("\n\t\t\t\tFrom:\n\t\t\t")]
-          ),
-          _vm._v(" "),
-          _c("select", {
-            staticClass: "content-item bottom",
-            attrs: { id: "fromCurrency" }
-          })
-        ]),
+      _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
+        _c(
+          "label",
+          {
+            staticClass: "content-item col-xs-12",
+            attrs: { for: "inputFromCurrency" }
+          },
+          [_vm._v("\n\t\t\tFrom:\n\t\t")]
+        ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-md-6 col-lg-4" }, [
-          _c(
-            "label",
-            { staticClass: "content-item col-xs-12", attrs: { for: "val" } },
-            [_vm._v("\n\t\t\t\tValue:\n\t\t\t")]
-          ),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "content-item bottom",
-            staticStyle: { width: "100%", "max-width": "300px" },
-            attrs: {
-              id: "val",
-              type: "number",
-              step: "any",
-              name: "fullname",
-              value: ""
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
-          _c(
-            "label",
-            {
-              staticClass: "content-item col-xs-12",
-              attrs: { for: "toCurrency" }
-            },
-            [_vm._v("\n\t\t\t\tTo:\n\t\t\t")]
-          ),
-          _vm._v(" "),
-          _c("select", {
-            staticClass: "content-item bottom",
-            attrs: { id: "toCurrency" }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-3" }, [
-          _c(
-            "label",
-            { staticClass: "content-item col-xs-12", attrs: { for: "result" } },
-            [_vm._v("\n\t\t\t\tResult:\n\t\t\t")]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "content-item", attrs: { id: "result" } }, [
-            _vm._v("0")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", {
-          staticClass: "col-xs-12 col-lg-6",
-          staticStyle: { clear: "both" }
+        _c("select", {
+          staticClass: "content-item bottom",
+          attrs: { id: "inputFromCurrency" }
         })
-      ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xs-12 col-md-6 col-lg-4" }, [
+        _c(
+          "label",
+          {
+            staticClass: "content-item col-xs-12",
+            attrs: { for: "inputValue" }
+          },
+          [_vm._v("\n\t\t\tValue:\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "content-item bottom",
+          staticStyle: { width: "100%", "max-width": "300px" },
+          attrs: {
+            id: "inputValue",
+            type: "number",
+            step: "any",
+            name: "fullname",
+            value: ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
+        _c(
+          "label",
+          {
+            staticClass: "content-item col-xs-12",
+            attrs: { for: "inputToCurrency" }
+          },
+          [_vm._v("\n\t\t\tTo:\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c("select", {
+          staticClass: "content-item bottom",
+          attrs: { id: "inputToCurrency" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-3" }, [
+        _c(
+          "label",
+          {
+            staticClass: "content-item col-xs-12",
+            attrs: { for: "outputResult" }
+          },
+          [_vm._v("\n\t\t\tResult:\n\t\t")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "content-item", attrs: { id: "outputResult" } },
+          [_vm._v("0")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", {
+        staticClass: "col-xs-12 col-lg-6",
+        staticStyle: { clear: "both" }
+      })
     ])
   }
 ]

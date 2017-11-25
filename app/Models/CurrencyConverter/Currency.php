@@ -13,7 +13,7 @@ class Currency extends Model
         'iso_4217', 'name', 'rate',
     ];
 	
-	function scopeWithCode($query, $code) {
+	public function scopeWithCode($query, $code) {
 		return $query->where('iso_4217', '=', $code);
 	}
 }

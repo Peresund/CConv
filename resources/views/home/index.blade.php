@@ -17,6 +17,8 @@
 		
     </head>
     <body>
+		<div id="testDiv"></div>
+		
         <div class="position-ref full-height">
             <div class="content">
 				<CurrencyConverter></CurrencyConverter>
