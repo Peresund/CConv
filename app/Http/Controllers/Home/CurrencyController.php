@@ -20,8 +20,7 @@ class CurrencyController extends Controller
 
 	public function getCurrencies()
 	{
-		$currencies = Currency::orderBy('iso_4217', 'ASC')->get();
-		return $currencies->toJson();
+		return Currency::getOrdered('iso_4217', Currency::ORDER_ASC);
 	}
 	
     public function updateCurrencies(Request $request)
@@ -30,12 +29,7 @@ class CurrencyController extends Controller
 		$rates = $input['rates'];
 		$names = $input['names'];
 		
-		foreach($rates as $key => $value) {
-			$currency = Currency::firstOrNew(array('iso_4217' => $key));
-			$currency->name = $names[$key];
-			$currency->rate = $value;
-			$currency->save();
-		}
+		Currency::updateAll($rates, $names);
 		
 		return redirect()->action(
 			'Home\CurrencyController@getCurrencies'

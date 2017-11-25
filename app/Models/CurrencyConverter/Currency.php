@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
+	const ORDER_ASC = 'ASC';
+	const ORDER_DESC = 'DESC';
 
 	public $timestamps = false;
 	
@@ -13,11 +15,17 @@ class Currency extends Model
         'iso_4217', 'name', 'rate',
     ];
 	
-	public function scopeWithCode($query, $code) {
-		return $query->where('iso_4217', '=', $code);
+	public static function getOrdered($row, $order) {
+		$currencies = Currency::orderBy($row, $order)->get();
+		return $currencies->toJson();
 	}
 	
-	public function getOrdered($order) {
-		
+	public static function updateAll($rates, $names) {
+		foreach($rates as $key => $value) {
+			$currency = Currency::firstOrNew(array('iso_4217' => $key));
+			$currency->name = $names[$key];
+			$currency->rate = $value;
+			$currency->save();
+		}
 	}
 }
