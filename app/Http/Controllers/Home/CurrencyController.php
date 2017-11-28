@@ -25,7 +25,7 @@ class CurrencyController extends Controller
 		$response = response($orderedCurrencies, 200)
 				->header('Content-Type',  'application/json; charset=UTF-8');
 				
-		return $orderedCurrencies;
+		return $response;
 	}
 	
     public function updateCurrencies(Request $request)

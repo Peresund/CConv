@@ -7,21 +7,21 @@ $(document).ready(function() {
 			"X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
 		}
 	});
-	
+
 	loadTable();
-	
-    $("#updateCurrenciesButton").on("click", function() {
+
+	$("#updateCurrenciesButton").on("click", function() {
 		updateCurrencies();
 	});
-	
-    $("#clearCurrenciesButton").on("click", function() {
+
+	$("#clearCurrenciesButton").on("click", function() {
 		clearCurrencies();
 	});
-	
+
 	$("#inputValue").on("keyup click", function() {
 		outputCurrencyConversion(currencyList);
 	});
-	
+
 	$("#inputFromCurrency, #inputToCurrency").on("change", function() {
 		outputCurrencyConversion(currencyList);
 	});
@@ -128,7 +128,7 @@ function getInputRates(currencyList) {
 	var fromCurrency = $("#inputFromCurrency").val();
 	var toCurrency = $("#inputToCurrency").val();
 	var rates = new Object();
-	
+
 	var foundFrom = false, foundTo = false;
 	try {
 		$.each(currencyList, function(key, value) {
@@ -147,14 +147,14 @@ function getInputRates(currencyList) {
 	} catch(error) {
 		JSON_PARSE_ERROR(error);
 	}
-	
+
 	return rates;
 }
 
 function calculateCurrencyConversion(currencyList) {
 	var rates = getInputRates(currencyList);
 	var fromValue = $("#inputValue").val();
-	
+
 	return (fromValue / rates.from * rates.to);
 }
 
