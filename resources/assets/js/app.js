@@ -8,12 +8,12 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+import 'expose-loader?$!expose-loader?jQuery!jquery'
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import 'expose-loader?$!expose-loader?jQuery!jquery'
 //
 //import Vue from 'vue'
 //import App from './App'

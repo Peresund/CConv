@@ -17,7 +17,14 @@
 		
     </head>
     <body>
-		<div id="testDiv"></div>
+		<div id="errorHolder" class="alert alert-danger" hidden>
+			<button type="button" class="close" aria-label="Close" onclick="closeError()">
+				<span>&times;</span>
+			</button>
+			<div id="errorOutput">
+				
+			</div>
+		</div>
 		
         <div class="position-ref full-height">
             <div class="content">
@@ -27,6 +34,7 @@
 		
 		<!-- Scripts -->
 		<script src="/js/app.js"></script>
+		<script src="/js/errors.js"></script>
 		<script src="/js/currencyConverter.js"></script>
     </body>
 </html>

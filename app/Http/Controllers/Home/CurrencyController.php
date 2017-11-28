@@ -20,7 +20,12 @@ class CurrencyController extends Controller
 
 	public function getCurrencies()
 	{
-		return Currency::getOrdered('iso_4217', Currency::ORDER_ASC);
+		$orderedCurrencies = Currency::getOrdered('iso_4217', Currency::ORDER_ASC);
+		
+		$response = response($orderedCurrencies, 200)
+				->header('Content-Type',  'application/json; charset=UTF-8');
+				
+		return $orderedCurrencies;
 	}
 	
     public function updateCurrencies(Request $request)

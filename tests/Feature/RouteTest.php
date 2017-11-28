@@ -5,18 +5,18 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class URLTest extends TestCase
+class RouteTest extends TestCase
 {
-    public function testIndex()
+    public function testIndexRouteOK()
     {
         $response = $this->get('/');
 
         $response->assertStatus(200);
     }
 	
-    public function testHome()
+    public function testGetCurrenciesRouteOK()
     {
-        $response = $this->get('/home/');
+        $response = $this->get('/getCurrencies');
 
         $response->assertStatus(200);
     }

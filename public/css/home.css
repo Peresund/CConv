@@ -71,3 +71,9 @@ hr.gradient {
 .content-item + .bottom {
 	margin-bottom: 15px;
 }
+
+.jqXHR-list {
+	margin: 16px;
+	padding: 16px;
+	background-color: white;
+}
