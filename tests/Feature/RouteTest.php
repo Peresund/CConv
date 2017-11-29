@@ -22,7 +22,7 @@ class RouteTest extends TestCase
 		$response->assertStatus(200);
     }
 	
-    public function testUpdateCurrenciesRouteOK()
+    public function testUpdateCurrenciesRouteRedirects()
     {
 		$updateData = [
 			'rates'	=> ['AAA' => '0.1', 'BBB' => '0.2'],
@@ -34,7 +34,7 @@ class RouteTest extends TestCase
         $response->assertRedirect('/getCurrencies');
     }
 	
-    public function testClearCurrenciesRouteOK()
+    public function testClearCurrenciesRouteRedirects()
     {
 		$response = $this->json('POST', '/clearCurrencies');
 
