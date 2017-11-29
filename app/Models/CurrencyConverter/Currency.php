@@ -22,7 +22,7 @@ class Currency extends Model
 	
 	public static function updateAll($rates, $names) {
 		foreach($rates as $key => $value) {
-			$currency = Currency::firstOrNew(array('iso_4217' => $key));
+			$currency = Currency::firstOrNew(['iso_4217' => $key]);
 			$currency->name = $names[$key];
 			$currency->rate = $value;
 			$currency->save();

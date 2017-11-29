@@ -10,14 +10,6 @@ use App\Models\CurrencyConverter\Currency;
 class CurrencyController extends Controller
 {
 
-	public function clearCurrencies()
-	{
-		Currency::truncate();
-		return redirect()->action(
-			'Home\CurrencyController@getCurrencies'
-		);
-	}
-
 	public function getCurrencies()
 	{
 		$orderedCurrencies = Currency::getOrdered('iso_4217', Currency::ORDER_ASC);
@@ -31,6 +23,7 @@ class CurrencyController extends Controller
     public function updateCurrencies(Request $request)
     {
 		$input = $request->input();
+		
 		$rates = $input['rates'];
 		$names = $input['names'];
 		
@@ -40,4 +33,12 @@ class CurrencyController extends Controller
 			'Home\CurrencyController@getCurrencies'
 		);
     }
+
+	public function clearCurrencies()
+	{
+		Currency::truncate();
+		return redirect()->action(
+			'Home\CurrencyController@getCurrencies'
+		);
+	}
 }
