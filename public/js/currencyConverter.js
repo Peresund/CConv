@@ -28,38 +28,48 @@ $(document).ready(function() {
 });
 
 function updateCurrencies() {
+	var names;
+	
 	/* X-CSRF-token not allowed by openexchangerates API */
 	delete $.ajaxSettings.headers["X-CSRF-TOKEN"];
-	$.get("https://openexchangerates.org/api/currencies.json", function(names) {
-		delete $.ajaxSettings.headers["X-CSRF-TOKEN"];
-		$.get("https://openexchangerates.org/api/latest.json?app_id=871cac4bb905471fa9d4288873aeb10d", function(rates) {
-			currencies = new Object();
-			currencies['rates'] = rates.rates;
-			currencies['names'] = names;
-
-			$.ajax({
-				type: "POST",
-				url: "/updateCurrencies",
-				contentType: "application/json; charset=utf-8",
-				data: JSON.stringify(currencies),
-				success: onSuccess,
-				error: onErrorCall,
-				complete: onComplete
-			});
-
-			function onSuccess(json) {
-				fillCurrencyTable(json);
-			}
-			function onErrorCall(jqXHR, textStatus, errorThrown) {
-				AJAX_RESPONSE_ERROR(jqXHR, textStatus, errorThrown);
-			}
-			function onComplete() {
-				return;
-			}
-		});
-		$.ajaxSettings.headers["X-CSRF-TOKEN"] = $("meta[name='csrf-token']").attr("content");
+	$.ajax({
+		type: "GET",
+		url: "https://openexchangerates.org/api/currencies.json",
+		contentType: "application/json; charset=UTF-8",
+		success: onGetCurrenciesSuccess,
+		error: ajaxResponseError
 	});
 	$.ajaxSettings.headers["X-CSRF-TOKEN"] = $("meta[name='csrf-token']").attr("content");
+	
+	function onGetCurrenciesSuccess(json) {
+		names = json;
+		
+		delete $.ajaxSettings.headers["X-CSRF-TOKEN"];
+		$.ajax({
+			type: "GET",
+			url: "https://openexchangerates.org/api/latest.json?app_id=871cac4bb905471fa9d4288873aeb10d",
+			contentType: "application/json; charset=UTF-8",
+			success: onGetRatesSuccess,
+			error: ajaxResponseError
+		});
+		$.ajaxSettings.headers["X-CSRF-TOKEN"] = $("meta[name='csrf-token']").attr("content");
+	}
+		
+	function onGetRatesSuccess(json) {
+
+		currencies = new Object();
+		currencies['rates'] = json.rates;
+		currencies['names'] = names;
+
+		$.ajax({
+			type: "POST",
+			url: "/updateCurrencies",
+			contentType: "application/json; charset=utf-8",
+			data: JSON.stringify(currencies),
+			success: fillCurrencyTable,
+			error: ajaxResponseError
+		});
+	}
 }
 
 function clearCurrencies() {
@@ -67,20 +77,9 @@ function clearCurrencies() {
 		type: "POST",
 		url: "/clearCurrencies",
 		contentType: "application/json; charset=utf-8",
-		success: onSuccess,
-		error: onErrorCall,
-		complete: onComplete
+		success: fillCurrencyTable,
+		error: ajaxResponseError
 	});
-
-	function onSuccess(json) {
-		fillCurrencyTable(json);
-	}
-	function onErrorCall(jqXHR, textStatus, errorThrown) {
-		AJAX_RESPONSE_ERROR(jqXHR, textStatus, errorThrown);
-	}
-	function onComplete() {
-		return;
-	}
 }
 
 function loadTable() {
@@ -88,20 +87,9 @@ function loadTable() {
 		type: "GET",
 		url: "/getCurrencies",
 		contentType: "application/json; charset=UTF-8",
-		success: onSuccess,
-		error: onErrorCall,
-		complete: onComplete
+		success: fillCurrencyTable,
+		error: ajaxResponseError
 	});
-
-	function onSuccess(json) {
-		fillCurrencyTable(json);
-	}
-	function onErrorCall(jqXHR, textStatus, errorThrown) {
-		AJAX_RESPONSE_ERROR(jqXHR, textStatus, errorThrown);
-	}
-	function onComplete() {
-		return;
-	}
 }
 
 function fillCurrencyTable(content) {
@@ -120,7 +108,7 @@ function fillCurrencyTable(content) {
 			);
 		});
 	} catch(error) {
-		JSON_PARSE_ERROR(error);
+		jsonParseError(error);
 	}
 }
 
@@ -145,7 +133,7 @@ function getInputRates(currencyList) {
 			}
 		});
 	} catch(error) {
-		JSON_PARSE_ERROR(error);
+		jsonParseError(error);
 	}
 
 	return rates;
