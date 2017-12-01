@@ -6,8 +6,10 @@ use Faker\Generator;
 
 class CurrencyTableSeeder extends Seeder
 {
+	public $size = 20;
+	
     /**
-     * Run the database seeds.
+     * Run the table seed.
      *
      * @return void
      */
@@ -16,6 +18,7 @@ class CurrencyTableSeeder extends Seeder
 		Currency::truncate();
 		
 		(new Generator)->seed(0);
-		factory(Currency::class, 10)->create();
+		$currencyFactory = factory(Currency::class, $this->size);
+		$currencyFactory->create();
     }
 }
