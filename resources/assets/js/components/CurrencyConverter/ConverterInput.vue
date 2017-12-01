@@ -31,14 +31,3 @@
 		<div class="col-xs-12 col-lg-6" style="clear:both;"></div>
 	</div>
 </template>
-
-<script>
-	$.get('https://openexchangerates.org/api/currencies.json', function(data) {
-		$.each(data, function (key, value) {
-			$('#inputFromCurrency, #inputToCurrency').append
-			(
-				"<option>" + key + "</option>"
-			);
-		});
-	});
-</script>

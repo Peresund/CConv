@@ -1,3 +1,7 @@
+/* global ajaxResponseError */
+/* global jsonParseError */
+
+var inputCurrencySelects = "#inputFromCurrency, #inputToCurrency";
 var currenciesTableBody = "#currenciesTable > tbody";
 var currencyList;
 
@@ -66,7 +70,7 @@ function updateCurrencies() {
 			url: "/updateCurrencies",
 			contentType: "application/json; charset=utf-8",
 			data: JSON.stringify(currencies),
-			success: fillCurrencyTable,
+			success: readCurrenciesJson,
 			error: ajaxResponseError
 		});
 	}
@@ -77,7 +81,7 @@ function clearCurrencies() {
 		type: "POST",
 		url: "/clearCurrencies",
 		contentType: "application/json; charset=utf-8",
-		success: fillCurrencyTable,
+		success: readCurrenciesJson,
 		error: ajaxResponseError
 	});
 }
@@ -87,16 +91,25 @@ function loadTable() {
 		type: "GET",
 		url: "/getCurrencies",
 		contentType: "application/json; charset=UTF-8",
-		success: fillCurrencyTable,
+		success: readCurrenciesJson,
 		error: ajaxResponseError
 	});
 }
 
+function readCurrenciesJson(json) {
+	currencyList = json;
+	reloadCurrencies();
+}
+
+function reloadCurrencies() {
+	fillCurrencyTable(currencyList);
+	fillCurrencyOptions(currencyList);
+}
+
 function fillCurrencyTable(content) {
-	currencyList = content;
 	$(currenciesTableBody).html("");
 	try {
-		$.each(currencyList, function(key, value) {
+		$.each(content, function(key, value) {
 			$(currenciesTableBody).append(
 				"<tr>" +
 					"<td>" + value.iso_4217 + "</td>" +
@@ -105,6 +118,20 @@ function fillCurrencyTable(content) {
 					"<td>" + value.date_modified + "</td>" +
 					"<td>" + value.rate + "</td>" +
 				"</tr>"
+			);
+		});
+	} catch(error) {
+		jsonParseError(error);
+	}
+}
+
+function fillCurrencyOptions(content) {
+	$(inputCurrencySelects).html("");
+	try {
+		$.each(content, function (key, value) {
+			$(inputCurrencySelects).append
+			(
+				"<option>" + value.iso_4217 + "</option>"
 			);
 		});
 	} catch(error) {
