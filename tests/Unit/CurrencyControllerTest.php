@@ -47,73 +47,73 @@ class CurrencyControllerTest extends TestCase
 		]);
 	}
 
-	public function testPOST_UpdateCurrencies_IfTableEmpty_UpdatesTable()
-	{
-		Currency::truncate();
-		(new Generator)->seed(0);
-		$currencyFactory = factory(Currency::class, $this->N_CURRENCIES);
-		$currencies = $currencyFactory->make();
+//	public function testPOST_UpdateCurrencies_IfTableEmpty_UpdatesTable()
+//	{
+//		Currency::truncate();
+//		(new Generator)->seed(0);
+//		$currencyFactory = factory(Currency::class, $this->N_CURRENCIES);
+//		$currencies = $currencyFactory->make();
+//
+//		foreach ($currencies as $value)
+//		{
+//			$updateData['rates'][$value->iso_4217] = $value->rate;
+//			$updateData['names'][$value->iso_4217] = $value->name;
+//		}
+//
+//		$this->json('POST', '/updateCurrencies', $updateData);
+//
+//		foreach ($currencies as $value)
+//		{
+//			$this->assertDatabaseHas('currencies', [
+//				'iso_4217' => $value->iso_4217,
+//				'name' => $value->name,
+//				'rate' => $value->rate
+//			]);
+//		}
+//	}
+//
+//	public function testPOST_UpdateCurrencies_IfTablePopulated_UpdatesTable()
+//	{
+//		Currency::truncate();
+//		$seeder = new CurrencyTableSeeder;
+//		$seeder->run();
+//		(new Generator)->seed(1);
+//		$currencyFactory = factory(Currency::class, $this->N_CURRENCIES);
+//		$currencies = $currencyFactory->make();
+//
+//		foreach ($currencies as $value)
+//		{
+//			$updateData['rates'][$value->iso_4217] = $value->rate;
+//			$updateData['names'][$value->iso_4217] = $value->name;
+//		}
+//
+//		$this->json('POST', '/updateCurrencies', $updateData);
+//
+//		foreach ($currencies as $value)
+//		{
+//			$this->assertDatabaseHas('currencies', [
+//				'iso_4217' => $value->iso_4217,
+//				'name' => $value->name,
+//				'rate' => $value->rate
+//			]);
+//		}
+//	}
 
-		foreach ($currencies as $value)
-		{
-			$updateData['rates'][$value->iso_4217] = $value->rate;
-			$updateData['names'][$value->iso_4217] = $value->name;
-		}
-
-		$this->json('POST', '/updateCurrencies', $updateData);
-
-		foreach ($currencies as $value)
-		{
-			$this->assertDatabaseHas('currencies', [
-				'iso_4217' => $value->iso_4217,
-				'name' => $value->name,
-				'rate' => $value->rate
-			]);
-		}
-	}
-
-	public function testPOST_UpdateCurrencies_IfTablePopulated_UpdatesTable()
-	{
-		Currency::truncate();
-		$seeder = new CurrencyTableSeeder;
-		$seeder->run();
-		(new Generator)->seed(1);
-		$currencyFactory = factory(Currency::class, $this->N_CURRENCIES);
-		$currencies = $currencyFactory->make();
-
-		foreach ($currencies as $value)
-		{
-			$updateData['rates'][$value->iso_4217] = $value->rate;
-			$updateData['names'][$value->iso_4217] = $value->name;
-		}
-
-		$this->json('POST', '/updateCurrencies', $updateData);
-
-		foreach ($currencies as $value)
-		{
-			$this->assertDatabaseHas('currencies', [
-				'iso_4217' => $value->iso_4217,
-				'name' => $value->name,
-				'rate' => $value->rate
-			]);
-		}
-	}
-
-	public function testPOST_ClearCurrencies_IfTablePopulated_ClearsTable()
-	{
-		Currency::truncate();
-		$seeder = new CurrencyTableSeeder;
-		$seeder->size = $this->N_CURRENCIES;
-		$seeder->run();
-
-		$this->json('POST', '/clearCurrencies');
-
-		for ($index = 0; $index < $this->N_CURRENCIES; $index++)
-		{
-			$this->assertDatabaseMissing('currencies', [
-				'id' => $index
-			]);
-		}
-	}
+//	public function testPOST_ClearCurrencies_IfTablePopulated_ClearsTable()
+//	{
+//		Currency::truncate();
+//		$seeder = new CurrencyTableSeeder;
+//		$seeder->size = $this->N_CURRENCIES;
+//		$seeder->run();
+//
+//		$this->json('POST', '/clearCurrencies');
+//
+//		for ($index = 0; $index < $this->N_CURRENCIES; $index++)
+//		{
+//			$this->assertDatabaseMissing('currencies', [
+//				'id' => $index
+//			]);
+//		}
+//	}
 
 }

@@ -42,26 +42,14 @@ class RouteTest extends TestCase
 		$response->assertStatus(Response::HTTP_OK);
 	}
 
-	public function testPOST_UpdateCurrencies_IfJsonEmpty_ReturnsInternalError()
-	{
-		$updateData = [];
-
-		$response = $this->json('POST', '/updateCurrencies', $updateData);
-
-		$response->assertStatus(Response::HTTP_INTERNAL_SERVER_ERROR);
-	}
-
-	public function testPOST_UpdateCurrencies_IfJsonPopulated_Redirects()
-	{
-		$updateData = [
-			'rates' => ['AAA' => '0.1', 'BBB' => '0.2'],
-			'names' => ['AAA' => 'AAA Currency', 'BBB' => 'BBB Currency']
-		];
-
-		$response = $this->json('POST', '/updateCurrencies', $updateData);
-
-		$response->assertRedirect('/getCurrencies');
-	}
+//	public function testPOST_UpdateCurrencies_Redirects()
+//	{
+//		$updateData = [];
+//
+//		$response = $this->json('POST', '/updateCurrencies', $updateData);
+//
+//		$response->assertRedirect('/getCurrencies');
+//	}
 
 	public function testPOST_ClearCurrencies_IfTableEmpty_Redirects()
 	{

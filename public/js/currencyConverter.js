@@ -32,48 +32,13 @@ $(document).ready(function() {
 });
 
 function updateCurrencies() {
-	var names;
-	
-	/* X-CSRF-token not allowed by openexchangerates API */
-	delete $.ajaxSettings.headers["X-CSRF-TOKEN"];
 	$.ajax({
-		type: "GET",
-		url: "https://openexchangerates.org/api/currencies.json",
-		contentType: "application/json; charset=UTF-8",
-		success: onGetCurrenciesSuccess,
+		type: "POST",
+		url: "/updateCurrencies",
+		contentType: "application/json; charset=utf-8",
+		success: readCurrenciesJson,
 		error: ajaxResponseError
 	});
-	$.ajaxSettings.headers["X-CSRF-TOKEN"] = $("meta[name='csrf-token']").attr("content");
-	
-	function onGetCurrenciesSuccess(json) {
-		names = json;
-		
-		delete $.ajaxSettings.headers["X-CSRF-TOKEN"];
-		$.ajax({
-			type: "GET",
-			url: "https://openexchangerates.org/api/latest.json?app_id=871cac4bb905471fa9d4288873aeb10d",
-			contentType: "application/json; charset=UTF-8",
-			success: onGetRatesSuccess,
-			error: ajaxResponseError
-		});
-		$.ajaxSettings.headers["X-CSRF-TOKEN"] = $("meta[name='csrf-token']").attr("content");
-	}
-		
-	function onGetRatesSuccess(json) {
-
-		currencies = new Object();
-		currencies['rates'] = json.rates;
-		currencies['names'] = names;
-
-		$.ajax({
-			type: "POST",
-			url: "/updateCurrencies",
-			contentType: "application/json; charset=utf-8",
-			data: JSON.stringify(currencies),
-			success: readCurrenciesJson,
-			error: ajaxResponseError
-		});
-	}
 }
 
 function clearCurrencies() {

@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
+	
+	'oxr' => [
+		'latest' => env('OXR_LATEST_URL'),
+		'currencies' => env('OXR_CURRENCIES_URL'),
+		'key' => env('OXR_KEY'),
+	],
 ];

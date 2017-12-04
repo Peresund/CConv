@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\View;
-use Illuminate\Http\Request;
 use App\Models\CurrencyConverter\Currency;
 
 class CurrencyController extends Controller
@@ -20,14 +18,9 @@ class CurrencyController extends Controller
 		return $response;
 	}
 	
-    public function updateCurrencies(Request $request)
+    public function updateCurrencies()
     {
-		$input = $request->input();
-		
-		$rates = $input['rates'];
-		$names = $input['names'];
-		
-		Currency::updateAll($rates, $names);
+		Currency::updateAll();
 		
 		return redirect()->action(
 			'Home\CurrencyController@getCurrencies'
