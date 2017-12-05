@@ -11356,27 +11356,13 @@ __webpack_require__(13);
 window.Vue = __webpack_require__(36);
 
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-//
-//import Vue from 'vue'
-//import App from './App'
-//
-//new Vue({
-//	el: '#app',
-//	template: '<App/>',
-//	components: { App }
-//})
-//
-//import CurrencyList from './components/CurrencyList'
-//new Vue({
-//	el: 'currencyList',
-//	template: '<CurrencyList/>',
-//	components: { CurrencyList }
-//});
+
 
 new Vue({
   el: 'CurrencyConverter',
@@ -43049,34 +43035,30 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-xs-12" }, [
-      _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
+      _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-1 content-item" }, [
         _c(
           "label",
           {
-            staticClass: "content-item col-xs-12",
+            staticClass: "col-xs-12 input-label",
             attrs: { for: "inputFromCurrency" }
           },
           [_vm._v("\n\t\t\tFrom:\n\t\t")]
         ),
         _vm._v(" "),
-        _c("select", {
-          staticClass: "content-item bottom",
-          attrs: { id: "inputFromCurrency" }
-        })
+        _c("select", { attrs: { id: "inputFromCurrency" } })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-xs-12 col-md-6 col-lg-4" }, [
+      _c("div", { staticClass: "col-xs-12 col-md-6 col-lg-4 content-item" }, [
         _c(
           "label",
           {
-            staticClass: "content-item col-xs-12",
+            staticClass: "col-xs-12 input-label",
             attrs: { for: "inputValue" }
           },
           [_vm._v("\n\t\t\tValue:\n\t\t")]
         ),
         _vm._v(" "),
         _c("input", {
-          staticClass: "content-item bottom",
           staticStyle: { width: "100%", "max-width": "300px" },
           attrs: {
             id: "inputValue",
@@ -43088,37 +43070,30 @@ var staticRenderFns = [
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-xs-12 col-md-2 col-lg-1" }, [
+      _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-1 content-item" }, [
         _c(
           "label",
           {
-            staticClass: "content-item col-xs-12",
+            staticClass: "col-xs-12 input-label",
             attrs: { for: "inputToCurrency" }
           },
           [_vm._v("\n\t\t\tTo:\n\t\t")]
         ),
         _vm._v(" "),
-        _c("select", {
-          staticClass: "content-item bottom",
-          attrs: { id: "inputToCurrency" }
-        })
+        _c("select", { attrs: { id: "inputToCurrency" } })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-3" }, [
+      _c("div", { staticClass: "col-xs-12 col-md-1 col-lg-3 content-item" }, [
         _c(
           "label",
           {
-            staticClass: "content-item col-xs-12",
+            staticClass: "col-xs-12 input-label",
             attrs: { for: "outputResult" }
           },
           [_vm._v("\n\t\t\tResult:\n\t\t")]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "content-item", attrs: { id: "outputResult" } },
-          [_vm._v("0")]
-        )
+        _c("div", { attrs: { id: "outputResult" } }, [_vm._v("0")])
       ]),
       _vm._v(" "),
       _c("div", {
