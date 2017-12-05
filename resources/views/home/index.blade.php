@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div id="errorHolder" class="alert alert-danger" hidden>
-			<button type="button" class="close" aria-label="Close" onclick="closeError()">
+			<button id="errorCloser" type="button" class="close" aria-label="Close">
 				<span>&times;</span>
 			</button>
 			<div id="errorOutput">
@@ -34,7 +34,8 @@
 
 		<!-- Scripts -->
 		<script src="/js/app.js"></script>
-		<script src="/js/errors.js"></script>
-		<script src="/js/currencyConverter.js"></script>
+		<script src="/js/errorhandler.js"></script>
+		<script src="/js/converter.js"></script>
+		<script src="/js/main.js"></script>
 	</body>
 </html>

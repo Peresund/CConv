@@ -22,16 +22,13 @@ class CurrencyController extends Controller
     {
 		Currency::updateAll();
 		
-		return redirect()->action(
-			'Home\CurrencyController@getCurrencies'
-		);
+		return CurrencyController::getCurrencies();
     }
 
 	public function clearCurrencies()
 	{
 		Currency::truncate();
-		return redirect()->action(
-			'Home\CurrencyController@getCurrencies'
-		);
+		
+		return CurrencyController::getCurrencies();
 	}
 }

@@ -51,23 +51,23 @@ class RouteTest extends TestCase
 //		$response->assertRedirect('/getCurrencies');
 //	}
 
-	public function testPOST_ClearCurrencies_IfTableEmpty_Redirects()
+	public function testPOST_ClearCurrencies_IfTableEmpty_StatusOK()
 	{
 		Currency::truncate();
 
 		$response = $this->json('POST', '/clearCurrencies');
 
-		$response->assertRedirect('/getCurrencies');
+		$response->assertStatus(Response::HTTP_OK);
 	}
 
-	public function testPOST_ClearCurrencies_IfTablePopulated_Redirects()
+	public function testPOST_ClearCurrencies_IfTablePopulated_StatusOK()
 	{
 		$seeder = new \DatabaseSeeder;
 		$seeder->run();
 
 		$response = $this->json('POST', '/clearCurrencies');
 
-		$response->assertRedirect('/getCurrencies');
+		$response->assertStatus(Response::HTTP_OK);
 	}
 
 }
