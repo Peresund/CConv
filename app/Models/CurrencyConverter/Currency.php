@@ -39,7 +39,7 @@ class Currency extends Model
 	 * Eloquent creation settings
 	 */
 	public $timestamps = false;		//Ignore creating default timestamps
-    protected $fillable = [			//Database columns that can be set manually
+	protected $fillable = [			//Database columns that can be set manually
 		'iso_4217', 'name', 'rate',
 	];
 
