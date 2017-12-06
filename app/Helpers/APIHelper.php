@@ -2,8 +2,9 @@
 
 namespace App\Helpers;
 
-use App\Exceptions\API\NotConnectableException;
-use App\Exceptions\API\InvalidRequestException;
+use App\Exceptions\API\APIConnectionUnavailableException;
+use App\Exceptions\API\APIRequestInvalidException;
+use Illuminate\Support\Facades\Log;
 
 class APIHelper {
 	
@@ -13,8 +14,9 @@ class APIHelper {
 
 		$json = curl_exec($curlHandle);
 		curl_close($curlHandle);
+		Log::debug($json);
 		if ($json === FALSE) {
-			throw new NotConnectableException($oxrRequest); 
+			throw new APIConnectionUnavailableException($oxrRequest); 
 		}
 		
 		return $json;
@@ -28,7 +30,7 @@ class APIHelper {
 		$status = (property_exists($result, 'status') ? $result->status : 200);
 		if ($status !== 200) {
 			$message = (property_exists($result, 'message') ? $result->message : null);
-			throw new InvalidRequestException($oxrRequest, $result->status, $message);
+			throw new APIRequestInvalidException($oxrRequest, $result->status, $message);
 		}
 		
 		return $result;

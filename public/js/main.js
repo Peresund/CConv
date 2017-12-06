@@ -1,7 +1,9 @@
 /* global converter */
-/* global errorHandler */
+/* global newErrorHandler */
 
 $(document).ready(function() {
+	var errorHandler = newErrorHandler();
+	
 	$.ajaxSetup({
 		headers: {
 			"X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")

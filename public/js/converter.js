@@ -1,4 +1,4 @@
-/* global errorHandler */
+/* global newErrorHandler */
 
 /**
  * Converter namespace
@@ -9,6 +9,7 @@ var converter = {};
  * Initialize converter namespace
  */
 (function() {
+	var errorHandler = newErrorHandler();
 	
 	/*
 	 * ============

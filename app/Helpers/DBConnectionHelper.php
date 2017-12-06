@@ -4,16 +4,16 @@ namespace App\Helpers;
 
 use \DB;
 use \PDOException;
+use App\Exceptions\Database\DBConnectionUnavailableException;
 
 class DBConnectionHelper {
 	
-	public static function isConnected() {
+	public static function ensureConnected() {
 		try {
 			DB::connection()->getPdo();
-			return true;
 		}
 		catch (PDOException $e) {
-			return false;
+			throw new DBConnectionUnavailableException(self::getName(), $e);
 		}
 	}
 	

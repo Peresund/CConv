@@ -2,31 +2,30 @@
 
 namespace App\Helpers;
 
-use Illuminate\Support\Facades\Log;
+use App\Messages\ResponseMessage;
 
-class ResponseHelper {
-	
+class ResponseHelper
+{
+
 	/**
-	 * Generates an error response containing the error message, and logs the more <br />
-	 * detailed exception message, if provided
+	 * Generates an error response containing the user-friendly error message and logs
+	 * the more detailed logging message
 	 * 
-	 * @param string $message The user-friendly message
-	 * @param \Exception $exceptionToLog The exception to use for detailed logging
+	 * @param App\Messages\ResponseMessage $errorMessage The object containing the message data
 	 * 
 	 * @return \Symfony\Component\HttpFoundation\Response|\Illuminate\Contracts\Routing\ResponseFactory A plain
-	 * text response with status 500 containing the user-friendly error <br />
-	 * message with the header "X-Error-Known=true", indicating that the <br />
+	 * text response with status 500 containing the user-friendly error
+	 * message with the header "X-Error-Known=true", indicating that the
 	 * error message is not auto-generated.
 	 */
-	public static function generateErrorResponse($message, $exceptionToLog = null) {
-		if ($exceptionToLog) {
-			Log::error($exceptionToLog->getMessage());
-		}
-		return response($message, 500)
-				->header('Content-Type', 'text/plain')
-				->header('X-Error-Known', 'true');
+	public static function generateErrorResponse(ResponseMessage $errorMessage)
+	{
+		$errorMessage->Log();
+		return response($errorMessage->getUserMessage(), 500)
+						->header('Content-Type', 'text/plain')
+						->header('X-Error-Known', 'true');
 	}
-	
+
 	/**
 	 * Generates a response containing the object's data
 	 * 
@@ -35,8 +34,10 @@ class ResponseHelper {
 	 * @return \Symfony\Component\HttpFoundation\Response|\Illuminate\Contracts\Routing\ResponseFactory A JSON
 	 * response with status 200 containing the object's data.
 	 */
-	public static function generateJson($object) {
+	public static function generateJson($object)
+	{
 		return response($object->toJson(), 200)
-				->header('Content-Type',  'application/json; charset=UTF-8');
+						->header('Content-Type', 'application/json; charset=UTF-8');
 	}
+
 }

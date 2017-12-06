@@ -4,31 +4,30 @@ namespace App\Models\CurrencyConverter;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\APIHelper;
-use App\Exceptions\API\EmptyQuotaException;
+use App\Exceptions\API\APIQuotaEmptyException;
 
 class Currency extends Model
 {
-	
 	/*
-	 * Model database structure data
+	 * Model structure data
 	 */
 	const ISO_4217_LENGTH = 3;
-	const NAME_LENGTH = 255;
+	const NAME_LENGTH = 256;
 	const STRUCTURE = [
-				'id',
-				'iso_4217',
-				'name',
-				'date_created',
-				'date_modified',
-				'rate'
+		'id',
+		'iso_4217',
+		'name',
+		'date_created',
+		'date_modified',
+		'rate'
 	];
-	
+
 	/*
 	 * Argument options for ordering
 	 */
 	const ORDER_ASC = 'ASC';
 	const ORDER_DESC = 'DESC';
-	
+
 	/*
 	 * Standard calculation data for currency template creation
 	 */
@@ -38,41 +37,48 @@ class Currency extends Model
 	/*
 	 * Eloquent creation settings
 	 */
-	public $timestamps = false;		//Ignore creating default timestamps
-	protected $fillable = [			//Database columns that can be set manually
+	public $timestamps = false;  //Ignore creating default timestamps
+	protected $fillable = [   //Database columns that can be set manually
 		'iso_4217', 'name', 'rate',
 	];
 
-	public static function updateAll() {
+	public static function updateAll()
+	{
 		$remaining = APIHelper::getOxrRemainingRequests();
-		if (intval($remaining) <= 0) {
-			throw new EmptyQuotaException();
+		if (intval($remaining) <= 0)
+		{
+			throw new APIQuotaEmptyException();
 		}
-		
+
 		$rates = APIHelper::getOxrRates();
 		$names = APIHelper::getOxrNames();
-		
-		foreach($rates as $key => $value) {
+
+		foreach ($rates as $key => $value)
+		{
 			$currency = self::firstOrNew(['iso_4217' => $key]);
 			$currency->name = $names->$key;
 			$currency->rate = $value;
 			$currency->save();
 		}
 	}
-	
-	private static function intToLetter($integer) {
-		return chr($integer+65);
+
+	private static function intToLetter($integer)
+	{
+		return chr($integer + 65);
 	}
-	
-	public static function createCurrencyCode($fromInteger) {
+
+	public static function createCurrencyCode($fromInteger)
+	{
 		$currencyCode = "";
-		
-		for ($position = 0; $position < self::ISO_4217_LENGTH; $position++) {
+
+		for ($position = 0; $position < self::ISO_4217_LENGTH; $position++)
+		{
 			$remainder = $fromInteger % self::ALPHABET_SIZE;
 			$fromInteger = floor($fromInteger / self::ALPHABET_SIZE);
 			$currencyCode = self::intToLetter($remainder) . $currencyCode;
 		}
-		
+
 		return $currencyCode;
 	}
+
 }

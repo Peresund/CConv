@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
 use App\Models\CurrencyConverter\Currency;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Database\QueryException;
-use App\Messages\ErrorMessages;
+
 use App\Helpers\DBConnectionHelper;
 use App\Helpers\ResponseHelper;
-use App\Exceptions\API\NotConnectableException;
-use App\Exceptions\API\EmptyQuotaException;
-use App\Exceptions\API\InvalidRequestException;
+
+use Illuminate\Database\QueryException;
+use App\Exceptions\API\APIConnectionUnavailableException;
+use App\Exceptions\API\APIQuotaEmptyException;
+use App\Exceptions\API\APIRequestInvalidException;
+use App\Exceptions\Database\DBConnectionUnavailableException;
+
+use App\Messages\Errors\CurrencyGetErrorMessage;
 
 class CurrencyController extends Controller
 {
@@ -23,9 +26,11 @@ class CurrencyController extends Controller
 	 */
 	public function getCurrencies()
 	{
-		if (!DBConnectionHelper::isConnected()) {
-			Log::error('Database ' . DBConnectionHelper::getName() .  ' not connected when getting currencies.');
-			return ResponseHelper::generateErrorResponse(ErrorMessages::DB_NOT_CONNECTED);
+		try {
+			DBConnectionHelper::ensureConnected();
+		}
+		catch (DBConnectionUnavailableException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
 		
 		$column = 'iso_4217';
@@ -33,8 +38,9 @@ class CurrencyController extends Controller
 		try {
 			$orderedCurrencies = Currency::orderBy($column, $order)->get();
 		}
-		catch(QueryException $e) { //Unknown query problem occured
-			return ResponseHelper::generateErrorResponse(ErrorMessages::CURRENCY_GET, $e);
+		catch(QueryException $ex) { //Unknown query problem occured
+			$errorMessage = new CurrencyGetErrorMessage($ex->getMessage());
+			return ResponseHelper::generateErrorResponse($errorMessage);
 		}
 		
 		return ResponseHelper::generateJson($orderedCurrencies);
@@ -50,25 +56,27 @@ class CurrencyController extends Controller
 	 */
     public function updateCurrencies()
     {
-		if (!DBConnectionHelper::isConnected()) {
-			Log::error('Database ' . DBConnectionHelper::getName() .  ' not connected when getting currencies.');
-			return ResponseHelper::generateErrorResponse(ErrorMessages::DB_NOT_CONNECTED);
+		try {
+			DBConnectionHelper::ensureConnected();
+		}
+		catch (DBConnectionUnavailableException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
 		
 		try {
 			Currency::updateAll();
 		}
-		catch (QueryException $e) {		//Unknown query problem occured
-			return ResponseHelper::generateErrorResponse(ErrorMessages::CURRENCY_UPDATE, $e);
+		catch (QueryException $ex) {		//Unknown query problem occured
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
-		catch(NotConnectableException $e) {
-			return ResponseHelper::generateErrorResponse(ErrorMessages::API_NOT_CONNECTABLE, $e);
+		catch(APIConnectionUnavailableException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
-		catch(EmptyQuotaException $e) {
-			return ResponseHelper::generateErrorResponse(ErrorMessages::API_QUOTA_EMPTY, $e);
+		catch(APIQuotaEmptyException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
-		catch(InvalidRequestException $e) {
-			return ResponseHelper::generateErrorResponse(ErrorMessages::API_INVALID_REQUEST, $e);
+		catch(APIRequestInvalidException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
 		
 		return CurrencyController::getCurrencies();
@@ -82,16 +90,18 @@ class CurrencyController extends Controller
 	 */
 	public function clearCurrencies()
 	{
-		if (!DBConnectionHelper::isConnected()) {
-			Log::error('Database ' . DBConnectionHelper::getName() .  ' not connected when getting currencies.');
-			return ResponseHelper::generateErrorResponse(ErrorMessages::DB_NOT_CONNECTED);
+		try {
+			DBConnectionHelper::ensureConnected();
+		}
+		catch (DBConnectionUnavailableException $ex) {
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
 		
 		try {
 			Currency::truncate();
 		}
-		catch(QueryException $e) {		//Unknown query problem occured
-			return ResponseHelper::generateErrorResponse(ErrorMessages::CURRENCY_CLEAR, $e);
+		catch(QueryException $ex) {		//Unknown query problem occured
+			return ResponseHelper::generateErrorResponse($ex->getMessageResponse());
 		}
 		
 		return CurrencyController::getCurrencies();

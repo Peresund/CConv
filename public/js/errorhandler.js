@@ -1,13 +1,20 @@
 
-/**
- * ErrorHandler namespace
- */
-var errorHandler = {};
+///**
+// * ErrorHandler namespace
+// */
+//var errorHandler = {};
 
 /**
- * Initialize errorHandler namespace
+ * Initialize a new errorHandler object
+ * 
+ * @returns {undefined}
  */
-(function() {
+function newErrorHandler() {
+	var errorHandler = new Object();
+
+	var errorHolder = "#errorHolder";
+	var errorOutput = "#errorOutput";
+	
 	errorHandler.jsonParseError = function(error) {
 		$(errorHolder).show();
 
@@ -35,7 +42,6 @@ var errorHandler = {};
 	errorHandler.closeError = function() {
 		$(errorHolder).hide();
 	};
-
-	var errorHolder = "#errorHolder";
-	var errorOutput = "#errorOutput";
-})();
+	
+	return errorHandler;
+};
