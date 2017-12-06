@@ -5,7 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use App\Models\CurrencyConverter\Currency;
 use Faker\Generator;
-use \CurrencyTableSeeder;
+use App\Database\Seeds\CurrencyTableSeeder;
 
 class CurrencyControllerTest extends TestCase
 {

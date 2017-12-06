@@ -5,7 +5,7 @@
 var errorHandler = {};
 
 /**
- * Initializes errorHandler namespace
+ * Initialize errorHandler namespace
  */
 (function() {
 	errorHandler.jsonParseError = function(error) {
@@ -19,14 +19,16 @@ var errorHandler = {};
 
 	errorHandler.ajaxResponseError = function(jqXHR, textStatus, errorThrown) {
 		$(errorHolder).show();
-
-		var output = "<p>Ajax response " + textStatus + ": " + (errorThrown) + "</p>";
-		output += "<div class='jqXHR-list'>";
-		$.each(jqXHR, function(key, value) {
-			output += "<p>" + key + ": " + value + "</p>";
-		});
-		output += "</div>";
-
+		
+		var output = "";
+		if (jqXHR.getResponseHeader("X-Error-Known") === "true") {
+			output += jqXHR.responseText;
+		} else if (jqXHR.responseText === undefined && jqXHR.status === 0) {
+			output += "Could not connect to the server. Please try again later.";
+		} else {
+			output += "Unknown server error occured.";
+		}
+		
 		$(errorOutput).html(output);
 	};
 	

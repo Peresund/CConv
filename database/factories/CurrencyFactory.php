@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Database\Factories;
+
 use Faker\Generator as Faker;
 use App\Models\CurrencyConverter\Currency;
 use Carbon\Carbon;

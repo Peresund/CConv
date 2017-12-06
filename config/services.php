@@ -38,6 +38,7 @@ return [
 	'oxr' => [
 		'latest' => env('OXR_LATEST_URL'),
 		'currencies' => env('OXR_CURRENCIES_URL'),
+		'usage' => env('OXR_USAGE_URL'),
 		'key' => env('OXR_KEY'),
 	],
 ];

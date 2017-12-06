@@ -6,7 +6,7 @@
 var converter = {};
 
 /**
- * Initializes converter namespace
+ * Initialize converter namespace
  */
 (function() {
 	
