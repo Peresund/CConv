@@ -4,9 +4,6 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Log;
 
-/**
- * 
- */
 class ResponseHelper {
 	
 	/**

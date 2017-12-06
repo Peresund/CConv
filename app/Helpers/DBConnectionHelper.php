@@ -2,7 +2,6 @@
 
 namespace App\Helpers;
 
-use \Exception;
 use \DB;
 use \PDOException;
 
@@ -12,7 +11,8 @@ class DBConnectionHelper {
 		try {
 			DB::connection()->getPdo();
 			return true;
-		} catch (PDOException $e) {
+		}
+		catch (PDOException $e) {
 			return false;
 		}
 	}

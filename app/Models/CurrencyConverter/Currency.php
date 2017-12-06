@@ -33,16 +33,16 @@ class Currency extends Model
 	 * Standard calculation data for currency template creation
 	 */
 	const ALPHABET_SIZE = 26;
-	const MAX_CURRENCY_CODES = self::ALPHABET_SIZE*self::ALPHABET_SIZE*self::ALPHABET_SIZE;
+	const MAX_CURRENCY_CODES = self::ALPHABET_SIZE * self::ALPHABET_SIZE * self::ALPHABET_SIZE;
 
 	/*
 	 * Eloquent creation settings
 	 */
-	public $timestamps = false;			//Ignore creating default timestamps
-    protected $fillable = [				//Database columns that can be set manually
-        'iso_4217', 'name', 'rate',
-    ];
-	
+	public $timestamps = false;		//Ignore creating default timestamps
+    protected $fillable = [			//Database columns that can be set manually
+		'iso_4217', 'name', 'rate',
+	];
+
 	public static function updateAll() {
 		$remaining = APIHelper::getOxrRemainingRequests();
 		if (intval($remaining) <= 0) {
