@@ -9,6 +9,8 @@ use App\Messages\Errors\APIConnectionUnavailableMessage;
 class APIConnectionUnavailableException extends Exception implements ResponseMessageContainer
 {
 
+	const EXCEPTION_MESSAGE = 'Failed to connect to URL: %s';
+
 	protected $url;
 	protected $responseMessage;
 
@@ -40,7 +42,7 @@ class APIConnectionUnavailableException extends Exception implements ResponseMes
 	protected function formatMessage($url, $previous)
 	{
 		return ($previous ? $previous->getMessage() . ' ' : '') .
-				'Failed to connect to URL: ' . $url;
+				sprintf(self::EXCEPTION_MESSAGE, $url);
 	}
 
 	/**
@@ -54,11 +56,11 @@ class APIConnectionUnavailableException extends Exception implements ResponseMes
 	}
 
 	/**
-	 * Get the message response object
+	 * Get the response message object
 	 * 
 	 * @return APIConnectionUnavailableMessage
 	 */
-	public function getMessageResponse()
+	public function getResponseMessage()
 	{
 		return $this->responseMessage;
 	}

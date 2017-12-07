@@ -7,7 +7,7 @@ use App\Messages\ResponseMessage;
 /**
  * Message to be displayed when the API request is invalid
  */
-class APIRequestInvalidMessage extends ErrorMessage
+class APIRequestInvalidMessage extends ResponseMessage
 {
 
 	const USER_MESSAGE = "The currency API refused the request.";

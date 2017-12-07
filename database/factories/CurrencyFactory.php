@@ -16,7 +16,7 @@ $factory->define(Currency::class, function (Faker $faker) {
 	$date = Carbon::create($year,$month ,$day , 0, 0, 0);
 	
     return [
-		'iso_4217' => Currency::createCurrencyCode($nextRow++),
+		'iso_4217' => Currency::generateCurrencyCode($nextRow++),
         'name' => str_random(mt_rand(1, 30)),
 		'rate' => (mt_rand(1, mt_getrandmax()) / (mt_getrandmax()/5)),
 		'date_created' => $date

@@ -8,7 +8,7 @@ class ResponseHelper
 {
 
 	/**
-	 * Generates an error response containing the user-friendly error message and logs
+	 * Generate an error response containing the user-friendly error message and logs
 	 * the more detailed logging message
 	 * 
 	 * @param App\Messages\ResponseMessage $errorMessage The object containing the message data
@@ -27,7 +27,7 @@ class ResponseHelper
 	}
 
 	/**
-	 * Generates a response containing the object's data
+	 * Generate a response containing the object's data
 	 * 
 	 * @param \Illuminate\Contracts\Support\Jsonable $object The Jsonable object to send with the response
 	 * 

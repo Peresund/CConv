@@ -9,6 +9,8 @@ use App\Messages\Errors\APIRequestInvalidMessage;
 class APIRequestInvalidException extends Exception implements ResponseMessageContainer
 {
 
+	const EXCEPTION_MESSAGE = 'Received status "%s" %s while trying to request the API: %s';
+
 	protected $request;
 	protected $status;
 	protected $statusMessage;
@@ -18,7 +20,7 @@ class APIRequestInvalidException extends Exception implements ResponseMessageCon
 	 * Construct a new invalid request exception instance
 	 *
 	 * @param  string  $request The API request being invalid
-	 * @param  int  $status The status received
+	 * @param  string  $status The status code received
 	 * @param  string  $statusMessage The status message received
 	 * @param  \Exception $previous [optional] <br /> The previous exception
 	 * 
@@ -39,6 +41,8 @@ class APIRequestInvalidException extends Exception implements ResponseMessageCon
 	 * Format the invalid request error message
 	 *
 	 * @param  string  $request The API request being invalid
+	 * @param  string  $status The status code received
+	 * @param  string  $statusMessage The status message received
 	 * @param  \Exception $previous The previous exception
 	 * 
 	 * @return string A formatted exception message.
@@ -46,9 +50,7 @@ class APIRequestInvalidException extends Exception implements ResponseMessageCon
 	protected function formatMessage($request, $status, $statusMessage, $previous)
 	{
 		return ($previous ? $previous->getMessage() . ' ' : '') .
-				'Received status "' . $status .
-				($statusMessage ? '" with message "' . $statusMessage : '') .
-				'" while trying to request the API: ' . $request;
+				sprintf(self::EXCEPTION_MESSAGE, $status, ($statusMessage ? ' with message "' . $statusMessage . '"' : ''), $request);
 	}
 
 	/**
@@ -82,11 +84,11 @@ class APIRequestInvalidException extends Exception implements ResponseMessageCon
 	}
 
 	/**
-	 * Get the message response object
+	 * Get the response message object
 	 * 
 	 * @return APIRequestInvalidMessage
 	 */
-	public function getMessageResponse()
+	public function getResponseMessage()
 	{
 		return $this->responseMessage;
 	}

@@ -9,6 +9,8 @@ use App\Messages\Errors\APIQuotaEmptyMessage;
 class APIQuotaEmptyException extends Exception implements ResponseMessageContainer
 {
 
+	const EXCEPTION_MESSAGE = 'The request quota for the API was less than or equal to 0';
+
 	protected $responseMessage;
 
 	/**
@@ -36,16 +38,15 @@ class APIQuotaEmptyException extends Exception implements ResponseMessageContain
 	 */
 	protected function formatMessage($previous)
 	{
-		return ($previous ? $previous->getMessage() . ' ' : '') .
-				'The request quota for the API was less than or equal to 0';
+		return ($previous ? $previous->getMessage() . ' ' : '') . self::EXCEPTION_MESSAGE;
 	}
 
 	/**
-	 * Get the message response object
+	 * Get the response message object
 	 * 
 	 * @return APIQuotaEmptyMessage
 	 */
-	public function getMessageResponse()
+	public function getResponseMessage()
 	{
 		return $this->responseMessage;
 	}

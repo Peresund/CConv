@@ -4,6 +4,9 @@ namespace App\Messages;
 
 use Illuminate\Support\Facades\Log;
 
+/**
+ * A message to be displayed and/or logged on certain events
+ */
 abstract class ResponseMessage
 {
 
@@ -69,9 +72,11 @@ abstract class ResponseMessage
 	/**
 	 * Construct the response message
 	 * 
-	 * @param string $userMessage
-	 * @param string $logMessage
-	 * @param int $level
+	 * @param string $userMessage The human-readable message to be shown for the user
+	 * @param string $logMessage The more detailed message to be logged
+	 * @param int $level The logging level
+	 * 
+	 * @return void
 	 */
 	protected function __construct($userMessage, $logMessage, $level)
 	{
@@ -80,21 +85,39 @@ abstract class ResponseMessage
 		$this->level = $level;
 	}
 
+	/**
+	 * Get the human-readable user message
+	 * 
+	 * @return string A human-readable message
+	 */
 	public function getUserMessage()
 	{
 		return $this->userMessage;
 	}
 
+	/**
+	 * Get the detailed logging message
+	 * 
+	 * @return string A detailed logging message
+	 */
 	public function getLogMessage()
 	{
 		return $this->logMessage;
 	}
 
+	/**
+	 * Get the logging level
+	 * 
+	 * @return int A number representing the logging level
+	 */
 	public function getLevel()
 	{
 		return $this->level;
 	}
 
+	/**
+	 * Log this response message's logging message
+	 */
 	public function Log()
 	{
 		switch ($this->level)

@@ -9,6 +9,8 @@ use App\Messages\Errors\DBConnectionUnavailableMessage;
 class DBConnectionUnavailableException extends PDOException implements ResponseMessageContainer
 {
 
+	const EXCEPTION_MESSAGE = 'Failed to connect to Database connection: %s';
+
 	protected $dbConnectionName;
 	protected $responseMessage;
 
@@ -40,7 +42,7 @@ class DBConnectionUnavailableException extends PDOException implements ResponseM
 	protected function formatMessage($DBConnectionName, $previous)
 	{
 		return ($previous ? $previous->getMessage() . ' ' : '') .
-				'Failed to connect to Database connection: ' . $DBConnectionName;
+				sprintf(self::EXCEPTION_MESSAGE, $DBConnectionName);
 	}
 
 	/**
@@ -54,11 +56,11 @@ class DBConnectionUnavailableException extends PDOException implements ResponseM
 	}
 
 	/**
-	 * Get the message response object
+	 * Get the response message object
 	 * 
 	 * @return DBConnectionUnavailableMessage
 	 */
-	public function getMessageResponse()
+	public function getResponseMessage()
 	{
 		return $this->responseMessage;
 	}

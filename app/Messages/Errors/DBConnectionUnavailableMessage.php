@@ -14,11 +14,6 @@ class DBConnectionUnavailableMessage extends ResponseMessage
 	const LOG_MESSAGE = "Database %s not connected when trying to get currencies.";
 	const ERROR_LEVEL = parent::LOG_LEVEL_ALERT;
 
-	/**
-	 * The name of the faulty database connection
-	 * 
-	 * @var string
-	 */
 	protected $dbConnectionName;
 
 	/**
@@ -36,9 +31,11 @@ class DBConnectionUnavailableMessage extends ResponseMessage
 	}
 
 	/**
+	 * Get the name of the faulty database connection
+	 * 
 	 * @return string The name of the faulty database connection
 	 */
-	public function getDatabaseConnectio()
+	public function getDatabaseConnection()
 	{
 		return $this->dbConnectionName;
 	}
